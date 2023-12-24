@@ -28,8 +28,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const uploadRoutes = require("./routes/uploadRoutes");
+
 require("./routes/authRoutes")(app);
 require("./routes/blogRoutes")(app);
+app.use("/api/upload", uploadRoutes);
 
 if (["production", "ci"].includes(process.env.NODE_ENV)) {
   app.use(express.static("client/build"));
